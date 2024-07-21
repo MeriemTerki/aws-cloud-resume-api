@@ -20,21 +20,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies and package Lambda function
-        run: |
-          # Ensure you have a requirements.txt if using Python dependencies
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt -t package/
-          cd package
-          zip -r ../lambda_function.zip .
-          cd ..
-          zip -g lambda_function.zip lambda_function.py
-
       - name: Upload Lambda function package
         uses: actions/upload-artifact@v2
         with:
           name: lambda_function_package
-          path: lambda_function.zip
+          path: "./src/lambda_function.zip"
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -47,7 +37,7 @@ jobs:
         uses: appleboy/lambda-action@v0.1.9
         with:
           function_name: "resume_function" # Correct Lambda function name
-          zip_file: "lambda_function.zip" # Path to your ZIP file
+          zip_file: "./src/lambda_function.zip" # Path to your ZIP file
 
       - name: Initialize Terraform
         run: terraform init
