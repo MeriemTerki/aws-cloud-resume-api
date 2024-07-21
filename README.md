@@ -41,6 +41,18 @@ Before you begin, ensure you have met the following requirements:
 
 ## Structure of the Project
 
-Here's a brief overview of the project's structure:
+```plaintext
+AWS-CLOUD-RESUME-API/
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── src/
+│   ├── lambda_function.py
+│   └── lambda_function.zip
+├── .gitignore
+├── main.tf
+├── provider.tf
+├── README.md
+└── requirements.txt
 
 
