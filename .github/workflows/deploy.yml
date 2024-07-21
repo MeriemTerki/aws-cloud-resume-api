@@ -1,4 +1,4 @@
-name: Deploy Infrastructure and Lambda Function
+name: Deploy Infrastructure  using Terraform for Lambda Function
 
 on:
   push:
