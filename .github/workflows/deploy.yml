@@ -12,24 +12,42 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-    concurrency: production_environment
+    concurrency:
+      group: production_environment
+      cancel-in-progress: true
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Install dependencies and package Lambda function
+        run: |
+          # Ensure you have a requirements.txt if using Python dependencies
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -t package/
+          cd package
+          zip -r ../lambda_function.zip .
+          cd ..
+          zip -g lambda_function.zip lambda_function.py
+
+      - name: Upload Lambda function package
+        uses: actions/upload-artifact@v2
+        with:
+          name: lambda_function_package
+          path: lambda_function.zip
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::238447548277:role/github-deploy-meriemterki-aws-resume-api
           role-session-name: github-deployment
-          aws-region: us-east-1 # Replace with your AWS region
+          aws-region: us-east-1
 
       - name: Deploy to AWS Lambda
         uses: appleboy/lambda-action@v0.1.9
         with:
-          function_name: "FetchResumeFunction" # Replace with your Lambda function name
-          zip_file: "src/lambda_function.zip" # Replace with the path to your ZIP file
+          function_name: "resume_function" # Correct Lambda function name
+          zip_file: "lambda_function.zip" # Path to your ZIP file
 
       - name: Initialize Terraform
         run: terraform init
