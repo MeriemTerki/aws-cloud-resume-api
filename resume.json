@@ -1,0 +1,80 @@
+{
+    "basics": {
+        "name": "Meriem Terki",
+        "label": "Data science & AI student",
+        "email": "mrmterki@gmail.com",
+        "phone": "+213558116755",
+        "summary": "A computer and data science student, passionate about AWS Cloud",
+        "location": {
+            "address": "Osmani elhadi",
+            "postalCode": "09002",
+            "city": "Arbaa",
+            "countryCode": "DZ",
+            "region": "Blida"
+        },
+        "profiles": [{
+                "network": "github",
+                "username": "MeriemTerki",
+                "url": "https://github.com/MeriemTerki"
+            },
+            {
+                "network": "medium",
+                "username": "meriemterki",
+                "url": "https://medium.com/@meriemterki"
+            },
+            {
+                "network": "linkedin",
+                "username": "meriemterki",
+                "url": "https://www.linkedin.com/in/meriemterki/"
+            }
+        ]
+    },
+    "work": [{
+        "name": "Guiddini",
+        "position": "Data scientist intern",
+        "url": "https://guiddini.com.dz/",
+        "startDate": "2024-05-08",
+        "endDate": "present",
+        "summary": "Build a customized AI chatbot to answer customers' questions for mytpe app",
+        "highlights": [
+            "Build a dataset of 2000 rows of questions related to mytpe app and use it to train an open source Mistral 7B model using RAG techniques to build a custom chatbot able to respond to mytpe users' questions"
+        ]
+    }],
+    "education": [{
+        "institution": "Higher school of computer science ESI-sba",
+        "url": "https://www.esi-sba.dz/fr/",
+        "area": "Data science",
+        "studyType": "Masters",
+        "startDate": "2020-12-03",
+        "endDate": "2026-06-26"
+    }],
+    "certifications": [{
+        "name": "AWS Certified Cloud Practitioner",
+        "date": "2024-01-06",
+        "issuer": "Amazon Web Services",
+        "url": "https://www.credly.com/badges/ab555caa-f588-4c1a-afdb-a96bdd89eb79/public_url"
+    }],
+    "skills": [{
+            "name": "Machine Learning"
+        },
+        {
+            "name": "Cloud Computing"
+        },
+        {
+            "name": "Data analysis"
+        }
+    ],
+    "languages": [{
+            "language": "English",
+            "fluency": "Advanced"
+        },
+        {
+            "language": "French",
+            "fluency": "Advanced"
+        },
+        {
+            "language": "Arabic",
+            "fluency": "Native"
+        }
+    ]
+}
