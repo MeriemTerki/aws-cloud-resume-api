@@ -1,0 +1,66 @@
+name: Deploy Infrastructure and Lambda Function
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: production_environment
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt -t package/
+          cd package
+          zip -r ../lambda_function.zip .
+          cd ..
+          zip -g lambda_function.zip lambda_function.py
+
+      - name: Upload Lambda function package
+        uses: actions/upload-artifact@v2
+        with:
+          name: lambda_function_package
+          path: lambda_function.zip
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: arn:aws:iam::238447548277:role/github-deploy-meriemterki-aws-resume-api
+          role-session-name: github-deployment
+          aws-region: us-east-1 # Replace with your AWS region
+
+      - name: Deploy to AWS Lambda
+        uses: appleboy/lambda-action@v0.1.9
+        with:
+          function_name: "resume_function" # Replace with your Lambda function name
+          zip_file: "lambda_function.zip" # Correct the path to your ZIP file
+
+      - name: Initialize Terraform
+        run: terraform init
+        working-directory: . # Set this to the directory where your Terraform files are located
+
+      - name: Apply Terraform
+        run: terraform apply -auto-approve
+        working-directory: . # Set this to the directory where your Terraform files are located
+
+      - name: Output API URL
+        id: output
+        run: |
+          terraform output -json > outputs.json
+          cat outputs.json
+
+      - name: Set API URL as environment variable
+        run: echo "API_URL=$(jq -r .api_url.value < outputs.json)" >> $GITHUB_ENV
