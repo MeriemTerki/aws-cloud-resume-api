@@ -14,7 +14,7 @@ This project automates the deployment of an AWS Lambda function using Terraform 
 
 ## Architecture
 
-![Architecture Diagram](./images/architecture-diagram.png)
+![Architecture Diagram](./images/api-resume-challenge.drawio.png)
 
 The architecture involves:
 
