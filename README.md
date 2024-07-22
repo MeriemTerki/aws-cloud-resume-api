@@ -112,4 +112,4 @@ AWS-CLOUD-RESUME-API/
 
 ## Medium Blog
 
-- For a detailed step by step guide to build this project , follow the steps in this ![blog](https://meriemterki.medium.com/step-by-step-guide-to-the-cloud-resume-api-with-aws-9d83cad2fde9)
+- For a detailed step by step guide to build this project , follow the steps in this [blog](https://meriemterki.medium.com/step-by-step-guide-to-the-cloud-resume-api-with-aws-9d83cad2fde9)
